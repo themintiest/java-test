@@ -1,5 +1,7 @@
 package com.lumera.wordsearch.searchengine.evaluator;
 
+import com.lumera.wordsearch.constants.WordClass;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,9 +49,5 @@ public class ClassEvaluator implements SearchEvaluator {
     private boolean isSemordnilap(String input) {
         String reverse = new StringBuilder(input).reverse().toString();
         return !input.equalsIgnoreCase(reverse);
-    }
-
-    public enum WordClass {
-        ISOGRAM, PALINDROME, SEMORDNILAP;
     }
 }

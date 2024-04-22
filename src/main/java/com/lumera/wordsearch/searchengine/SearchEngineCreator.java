@@ -3,7 +3,7 @@ package com.lumera.wordsearch.searchengine;
 import com.lumera.wordsearch.searchengine.evaluator.ClassEvaluator;
 import com.lumera.wordsearch.searchengine.evaluator.DefaultEvaluator;
 import com.lumera.wordsearch.searchengine.evaluator.EndsWithEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.MadeUpEvaluator;
+import com.lumera.wordsearch.searchengine.evaluator.ContainsOnlyEvaluator;
 import com.lumera.wordsearch.searchengine.evaluator.MaxLengthEvaluator;
 import com.lumera.wordsearch.searchengine.evaluator.MinLengthEvaluator;
 import com.lumera.wordsearch.searchengine.evaluator.SearchEvaluator;
@@ -27,7 +27,7 @@ public class SearchEngineCreator {
 
         private String withClass;
 
-        private String madeUpByLetters;
+        private String containsOnly;
 
         public SearchEngineCreatorBuilder withMinLength(Integer minLength) {
             this.minLength = minLength;
@@ -54,8 +54,8 @@ public class SearchEngineCreator {
             return this;
         }
 
-        public SearchEngineCreatorBuilder madeUpBy(String letters) {
-            this.madeUpByLetters = letters;
+        public SearchEngineCreatorBuilder containsOnly(String letters) {
+            this.containsOnly = letters;
             return this;
         }
 
@@ -77,8 +77,8 @@ public class SearchEngineCreator {
             if (withClass != null) {
                 searchEvaluator = searchEvaluator.and(new ClassEvaluator(withClass));
             }
-            if (madeUpByLetters != null) {
-                searchEvaluator = searchEvaluator.and(new MadeUpEvaluator(madeUpByLetters));
+            if (containsOnly != null) {
+                searchEvaluator = searchEvaluator.and(new ContainsOnlyEvaluator(containsOnly));
             }
             return searchEvaluator;
         }

@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MadeUpEvaluator implements SearchEvaluator {
+public class ContainsOnlyEvaluator implements SearchEvaluator {
 
     private final String letters;
 
-    public MadeUpEvaluator(String letters) {
+    public ContainsOnlyEvaluator(String letters) {
         this.letters = letters;
     }
 

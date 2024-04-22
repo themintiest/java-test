@@ -3,16 +3,21 @@ package com.lumera.wordsearch;
 import com.lumera.wordsearch.searchengine.SearchEngine;
 import com.lumera.wordsearch.searchengine.SearchEngineCreator;
 import com.lumera.wordsearch.searchengine.evaluator.SearchEvaluator;
+import com.lumera.wordsearch.utils.AppUtils;
 
+import java.time.Instant;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.lumera.wordsearch.WordlistKt.readWordList;
+import static com.lumera.wordsearch.utils.FileUtils.readFile;
 
 /**
  * Entry point of application.
  */
 public class WordSearchApplication {
+
+    private static final String EXIT_MODE = "exit";
 
     private static List<String> words;
 
@@ -20,19 +25,21 @@ public class WordSearchApplication {
     public static void run() {
         while (true) {
             try {
-                System.out.println("Input query: ");
+                System.out.println("Input query (or type exit if you want to exit app): ");
                 Scanner scanner = new Scanner(System.in);
                 String text = scanner.nextLine();
-                SearchEvaluator searchEvaluator = SearchEngineCreator.builder()
-                        .withMinLength(3)
-                        .withMaxLength(8)
-                        .withClass(null)
-                        .madeUpBy("abcde")
-                        .build();
-                List<String> result = SearchEngine.search(words, searchEvaluator);
-                for (String word : result) {
-                    System.out.println(word);
+                if (text.equalsIgnoreCase(EXIT_MODE)) {
+                    System.exit(0);
                 }
+                SearchEvaluator searchEvaluator = AppUtils.toEvaluator(text);
+                Instant startTime = Instant.now();
+                List<String> results = SearchEngine.search(words, searchEvaluator);
+                System.out.println();
+                System.out.println(results);
+                System.out.println();
+                Instant endTime = Instant.now();
+                long time = endTime.toEpochMilli() - startTime.toEpochMilli();
+                System.out.printf("Found and showed %s result(s) in %s milliseconds%n", results.size(), time);
             } catch (RuntimeException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -40,8 +47,8 @@ public class WordSearchApplication {
     }
 
     public static void main(String[] args) {
-        words = readWordList("wordlist.txt");
         try {
+            words = readFile("wordlist.txt");
             run();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
