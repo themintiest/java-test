@@ -1,12 +1,10 @@
 package com.lumera.wordsearch;
 
 import com.lumera.wordsearch.searchengine.SearchEngine;
-import com.lumera.wordsearch.searchengine.SearchEngineCreator;
 import com.lumera.wordsearch.searchengine.evaluator.SearchEvaluator;
 import com.lumera.wordsearch.utils.AppUtils;
 
 import java.time.Instant;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 

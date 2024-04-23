@@ -1,23 +1,16 @@
 package com.lumera.wordsearch.searchengine;
 
-import com.lumera.wordsearch.searchengine.evaluator.ClassEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.DefaultEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.EndsWithEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.ContainsOnlyEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.MaxLengthEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.MinLengthEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.SearchEvaluator;
-import com.lumera.wordsearch.searchengine.evaluator.StartsWithEvaluator;
+import com.lumera.wordsearch.searchengine.evaluator.*;
 
-public class SearchEngineCreator {
+public class SearchEvaluatorConstructor {
 
-    private SearchEngineCreator() {}
+    private SearchEvaluatorConstructor() {}
 
-    public static SearchEngineCreatorBuilder builder() {
-        return new SearchEngineCreatorBuilder();
+    public static SearchEvaluatorConstructorBuilder builder() {
+        return new SearchEvaluatorConstructorBuilder();
     }
 
-    public static class SearchEngineCreatorBuilder {
+    public static class SearchEvaluatorConstructorBuilder {
         private Integer minLength;
         private Integer maxLength;
 
@@ -29,32 +22,32 @@ public class SearchEngineCreator {
 
         private String containsOnly;
 
-        public SearchEngineCreatorBuilder withMinLength(Integer minLength) {
+        public SearchEvaluatorConstructorBuilder withMinLength(Integer minLength) {
             this.minLength = minLength;
             return this;
         }
 
-        public SearchEngineCreatorBuilder withMaxLength(Integer maxLength) {
+        public SearchEvaluatorConstructorBuilder withMaxLength(Integer maxLength) {
             this.maxLength = maxLength;
             return this;
         }
 
-        public SearchEngineCreatorBuilder startsWith(String startsWith) {
+        public SearchEvaluatorConstructorBuilder startsWith(String startsWith) {
             this.startsWith = startsWith;
             return this;
         }
 
-        public SearchEngineCreatorBuilder endsWith(String endsWith) {
+        public SearchEvaluatorConstructorBuilder endsWith(String endsWith) {
             this.endsWith = endsWith;
             return this;
         }
 
-        public SearchEngineCreatorBuilder withClass(String className) {
+        public SearchEvaluatorConstructorBuilder withClass(String className) {
             this.withClass = className;
             return this;
         }
 
-        public SearchEngineCreatorBuilder containsOnly(String letters) {
+        public SearchEvaluatorConstructorBuilder containsOnly(String letters) {
             this.containsOnly = letters;
             return this;
         }

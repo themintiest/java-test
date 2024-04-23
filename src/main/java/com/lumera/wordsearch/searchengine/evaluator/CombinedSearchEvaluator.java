@@ -14,6 +14,6 @@ public class CombinedSearchEvaluator implements SearchEvaluator {
     @Override
     public boolean evaluate(String item) {
         // All rules must pass for the composite rule to pass
-        return searchEvaluators.stream().allMatch(rule -> rule.evaluate(item));
+        return searchEvaluators.stream().allMatch(evaluator -> evaluator.evaluate(item));
     }
 }
